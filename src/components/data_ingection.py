@@ -8,6 +8,9 @@ from src.logger import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split #we need to perfoem train_test_split
 from dataclasses import dataclass
+
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
 #dataclass : It's most useful when you want to create classes that are primarily used to store data (i.e., data containers), without having to manually write boilerplate code.
 
 #In data injection whenver we are performing the data injection component there should be some inputs that may be required in this data injection component.
@@ -59,7 +62,10 @@ class DataInjection:
            
 if __name__=="__main__":
     obj=DataInjection()
-    obj.initiate_data_ingestion()
+    train_data,test_data=obj.initiate_data_ingestion()
+
+    data_transformation=DataTransformation()
+    data_transformation.initiate_data_transformation(train_data,test_data)
     
 
 
