@@ -11,6 +11,9 @@ from dataclasses import dataclass
 
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformationConfig
+
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
 #dataclass : It's most useful when you want to create classes that are primarily used to store data (i.e., data containers), without having to manually write boilerplate code.
 
 #In data injection whenver we are performing the data injection component there should be some inputs that may be required in this data injection component.
@@ -65,7 +68,10 @@ if __name__=="__main__":
     train_data,test_data=obj.initiate_data_ingestion()
 
     data_transformation=DataTransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data)
+
+    modeltrainer=ModelTrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr,test_arr))
     
 
 
