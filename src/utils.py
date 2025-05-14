@@ -7,6 +7,7 @@ import sys
 import numpy as np
 import pandas as pd
 import dill 
+import pickle
 
 from sklearn.model_selection import GridSearchCV
 from src.exception import CustomException
@@ -56,4 +57,15 @@ def evaluate_model(X_train,y_train,X_test,y_test,models,param):
         return report
     except Exception as e:
         raise CustomException(e,sys)
+    
+#here iam create my own definetion called a load_object. it just doing it will open the filepath and read it by readbyte(( "rb" mode), it will be treated as an uploaded file) mode and it is loading the pkl file using this "dill" .
+#inshot this load object is responsible in loading the pkl file.that is reason we have written in utils.py
+#reason in the written in utils.py this is common functionality through out the project.
+def load_object(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return pickle.load(file_obj)
+
+    except Exception as e:
+        raise CustomException(e, sys)
 
